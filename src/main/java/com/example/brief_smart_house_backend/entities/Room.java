@@ -4,25 +4,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.persistence.*;
 import java.io.Serializable;
 
+@Document("Room")
 @Data
-@Entity
-@Table(name = "Room")
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+
 public class Room implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
+    @Transient
+    public static final String SEQUENCE_NAME = "room_sequence";
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "number")
     private int number;
 }
